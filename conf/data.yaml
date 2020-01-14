@@ -41,7 +41,7 @@ bert:
   hidden_size: 768
 
 albert:
-  bert_path: '/Users/tiniwu/kandian/workspace/kd_article/text_nlp/text_classification_py/data/albert_base_zh'
+  bert_path: 'data/albert_base_zh'
   hidden_size: 768
 
 erine:
