@@ -1,0 +1,49 @@
+char_vec_file: 'data/ThUCNews/embedding_SougouNews.npz'
+word_vec_file: 'data/ThUCNews/word2vec.npy'
+data_dir: 'data/ThUCNews'
+train_file: 'data/ThUCNews/train.txt'
+dev_file: 'data/ThUCNews/dev.txt'
+test_file: 'data/ThUCNews/text.txt'
+label_file: 'data/ThUCNews/class.txt'
+vocab_file: 'data/ThUCNews/words.pkl'
+log_path: 'data/ThUCNews/logs/'
+save_model_path: 'data/ThUCNews/save_model/'
+bert_path: 'data/bert-base-chinese'
+
+proj_name: text classification
+vocab_size: 100000
+max_seq_len: 16
+max_char_len: 30
+embedding_size: 300
+hidden_size: 128
+epochs: 10
+batch_size: 64
+dropout: 0.5
+num_classes: 10
+learning_rate: 1e-3
+weight_decay: 0.01
+adam_epsilon: 1e-8
+
+# model parameters
+cnn:
+  filter_sizes: 2,3,4
+  num_filters: 128
+rnn:
+  num_layers: 2
+transformer:
+  d_model: 300
+  num_head: 5
+  hidden_size: 1024
+  num_encoder: 2
+
+bert:
+  bert_path: 'data/bert-base-chinese'
+  hidden_size: 768
+
+albert:
+  bert_path: '/Users/tiniwu/kandian/workspace/kd_article/text_nlp/text_classification_py/data/albert_base_zh'
+  hidden_size: 768
+
+erine:
+  bert_path: 'data/baidu_ernie'
+  hidden_size: 768

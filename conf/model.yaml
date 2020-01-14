@@ -1,0 +1,17 @@
+name: text classification
+vocab_size: 100000
+embedding_dim: 200
+hidden_size: 100
+epochs: 20
+batch_size: 32
+dropout: 0.5
+num_class: 2
+
+model:
+    - name: cnn
+      filter_sizes: (2, 3, 4)
+      num_filters: 128
+    - name: rnn
+      rnn_dims: 2
+
+
