@@ -20,6 +20,5 @@ python run.py --model bert --data_conf conf/data.yaml
 ## Preferences
 [1] BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding  
 [2] Convolutional Neural Networks for Sentence Classification <br>
-[3] [Bert-Chinese-Text-Classification-Pytorch](https://github.com/649453932/Bert-Chinese-Text-Classification-Pytorch) <br>
+[3] Recurrent Convolutional Neural Networks for Text Classification
 [4] [attention-is-all-you-need-pytorch](https://github.com/jadore801120/attention-is-all-you-need-pytorch) <br>
-[5] [Chinese-Text-Classification-Pytorch](https://github.com/649453932/Chinese-Text-Classification-Pytorch)
