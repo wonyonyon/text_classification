@@ -3,11 +3,9 @@
 # Description:
 # @Author: tiniwu
 
-import yaml
 import os
 import pickle as pkl
 
-from transformers import InputExample
 import jieba
 import numpy as np
 from tqdm import tqdm
@@ -15,7 +13,7 @@ import torch
 import logging
 
 logger = logging.getLogger(__name__)
-UNK, PAD, CLS = '<UNK>', '<PAD>', '[CLS]'
+UNK, PAD, CLS = '[UNK]', '[PAD]', '[CLS]'
 
 
 class BasicTextProcessor(object):
@@ -116,7 +114,7 @@ class BertTextProcessor(BasicTextProcessor):
                 if len(splits) != 2:
                     continue
                 else:
-                    tokens = self.tokenizer.tokenize(splits[0])
+                    tokens = [CLS] + self.tokenizer.tokenize(splits[0])
                     seq_len = len(tokens)
                     if seq_len > self.config['max_char_len']:
                         tokens = tokens[:self.config['max_char_len']]

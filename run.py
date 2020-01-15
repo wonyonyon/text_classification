@@ -67,14 +67,23 @@ def train(args, config, model, train_dataset, dev_dataset, is_bert=False):
     train_loader = DataLoader(train_dataset, batch_size=config['batch_size'], sampler=train_sampler)
     writer = SummaryWriter(log_dir=config['log_path'] + '/' + args.model_name)
 
-    no_decay = ["bias", "LayerNorm.weight"]
-    optimizer_grouped_parameters = [
-        {"params": [p for n, p in model.named_parameters() if not any(nd in n for nd in no_decay)],
-         "weight_decay": 0.01},
-        {"params": [p for n, p in model.named_parameters() if any(nd in n for nd in no_decay)], "weight_decay": 0.01}
-    ]
-    optimizer = AdamW(optimizer_grouped_parameters, lr=float(config['learning_rate']), eps=float(config['adam_epsilon']))
+    # no_decay = ["bias", "LayerNorm.weight"]
+    # optimizer_grouped_parameters = [
+    #     {"params": [p for n, p in model.named_parameters() if not any(nd in n for nd in no_decay)],
+    #      "weight_decay": 0.01},
+    #     {"params": [p for n, p in model.named_parameters() if any(nd in n for nd in no_decay)], "weight_decay": 0.01}
+    # ]
+    # optimizer = AdamW(optimizer_grouped_parameters, lr=float(config['learning_rate']), eps=float(config['adam_epsilon']))
 
+    param_optimizer = list(model.named_parameters())
+    no_decay = ['bias', 'gamma', 'beta']
+    optimizer_grouped_parameters = [
+        {'params': [p for n, p in param_optimizer if not any(nd in n for nd in no_decay)],
+         'weight_decay_rate': 0.01},
+        {'params': [p for n, p in param_optimizer if any(nd in n for nd in no_decay)],
+         'weight_decay_rate': 0.0}
+    ]
+    optimizer = AdamW(optimizer_grouped_parameters, lr=3e-5)
     total_batch = 0
     dev_best_loss = float('inf')
     lass_improved = 0
@@ -90,6 +99,7 @@ def train(args, config, model, train_dataset, dev_dataset, is_bert=False):
                 inputs, labels = batch[0], batch[1]
             # token_id = token_id.to(args.device)
             # label = token_id.to(args.device)
+            print(inputs, labels)
             outputs = model(inputs)
             model.zero_grad()
             loss = F.cross_entropy(outputs, labels)
